@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PomodoroApp", "PomodoroApp\PomodoroApp\PomodoroApp.csproj", "{665B02BF-22E8-465F-BB68-DBF97A2EA0A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PomodoroApp.Android", "PomodoroApp\PomodoroApp.Android\PomodoroApp.Android.csproj", "{63AE2024-040C-4EE6-A6FB-4DCE89AF33C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PomodoroApp.Desktop", "PomodoroApp\PomodoroApp.Desktop\PomodoroApp.Desktop.csproj", "{06FD6E77-CBB5-4206-BC53-C9087BFA52ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PomodoroApp.iOS", "PomodoroApp\PomodoroApp.iOS\PomodoroApp.iOS.csproj", "{D1213589-1B78-469F-99D5-B3ACE5D31B87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PomodoroApp.Browser", "PomodoroApp\PomodoroApp.Browser\PomodoroApp.Browser.csproj", "{9930D70A-BFED-4475-8BE7-CF6ABFF083DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{665B02BF-22E8-465F-BB68-DBF97A2EA0A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665B02BF-22E8-465F-BB68-DBF97A2EA0A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665B02BF-22E8-465F-BB68-DBF97A2EA0A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665B02BF-22E8-465F-BB68-DBF97A2EA0A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AE2024-040C-4EE6-A6FB-4DCE89AF33C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AE2024-040C-4EE6-A6FB-4DCE89AF33C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AE2024-040C-4EE6-A6FB-4DCE89AF33C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{63AE2024-040C-4EE6-A6FB-4DCE89AF33C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AE2024-040C-4EE6-A6FB-4DCE89AF33C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AE2024-040C-4EE6-A6FB-4DCE89AF33C3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{06FD6E77-CBB5-4206-BC53-C9087BFA52ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06FD6E77-CBB5-4206-BC53-C9087BFA52ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06FD6E77-CBB5-4206-BC53-C9087BFA52ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06FD6E77-CBB5-4206-BC53-C9087BFA52ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1213589-1B78-469F-99D5-B3ACE5D31B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1213589-1B78-469F-99D5-B3ACE5D31B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1213589-1B78-469F-99D5-B3ACE5D31B87}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D1213589-1B78-469F-99D5-B3ACE5D31B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1213589-1B78-469F-99D5-B3ACE5D31B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1213589-1B78-469F-99D5-B3ACE5D31B87}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9930D70A-BFED-4475-8BE7-CF6ABFF083DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9930D70A-BFED-4475-8BE7-CF6ABFF083DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9930D70A-BFED-4475-8BE7-CF6ABFF083DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9930D70A-BFED-4475-8BE7-CF6ABFF083DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24A6C3A9-3AA5-4937-A451-3F3658B50454}
+	EndGlobalSection
+EndGlobal
