@@ -22,7 +22,7 @@ namespace PomodoroApp
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = GetRequiredService<MainViewModel>()
+                    DataContext = GetRequiredService<MainWindowViewModel>()
                 };
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)

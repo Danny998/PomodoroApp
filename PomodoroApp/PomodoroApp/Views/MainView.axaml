@@ -5,12 +5,23 @@
              xmlns:vm="clr-namespace:PomodoroApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PomodoroApp.Views.MainView"
-             x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
+             x:DataType="vm:MainViewModel"
+			 x:CompileBindings="True">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
-
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<vm:MainViewModel />
+	</Design.DataContext>
+	<Grid>
+		<ExperimentalAcrylicBorder IsHitTestVisible="False" Grid.RowSpan="5">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.65" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+		<ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
+	</Grid>
 </UserControl>

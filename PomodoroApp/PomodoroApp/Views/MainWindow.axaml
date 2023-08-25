@@ -7,8 +7,24 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="PomodoroApp.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="PomodoroApp">
+        Title="Pomodoro"
+		x:DataType="vm:MainWindowViewModel"
+        x:CompileBindings="True">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel />
+	</Design.DataContext>
 	<Grid>
-		<TextBlock Text="TEST123" />
+		<ExperimentalAcrylicBorder IsHitTestVisible="False" Grid.RowSpan="5">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.65" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+		<ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
 	</Grid>
 </Window>

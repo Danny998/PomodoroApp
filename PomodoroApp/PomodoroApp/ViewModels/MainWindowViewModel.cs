@@ -1,13 +1,18 @@
 ﻿using PomodoroApp.Stores;
 using ReactiveUI;
+using Splat;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PomodoroApp.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase
     {
-        public string Greeting => "Welcome to Avalonia!";
         private readonly ViewModelStore _viewModelStore;
-        public MainViewModel(ViewModelStore viewModelStore, PomodoroMainViewModel mainViewModel)
+        public MainWindowViewModel(ViewModelStore viewModelStore, PomodoroMainViewModel mainViewModel)
         {
             _viewModelStore = viewModelStore;
             _viewModelStore.CurrentViewModelChanged += _viewModelStore_CurrentViewModelChanged;
