@@ -9,6 +9,7 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="Pomodoro"
 		x:DataType="vm:MainWindowViewModel"
+		MinWidth="400"
         x:CompileBindings="True">
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,

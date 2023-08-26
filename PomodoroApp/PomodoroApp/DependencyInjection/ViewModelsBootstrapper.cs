@@ -22,6 +22,7 @@ namespace PomodoroApp.DependencyInjection
         {
             services.RegisterLazySingleton(() => new AboutViewModel());
             services.RegisterLazySingleton(() => new PomodoroMainViewModel());
+            services.RegisterLazySingleton(() => new HandlingPomodoroViewModel());
             services.RegisterLazySingleton(() => new MainViewModel(resolver.GetRequiredService<ViewModelStore>(),
                 resolver.GetRequiredService<PomodoroMainViewModel>()));
             services.RegisterLazySingleton(() => new MainWindowViewModel(resolver.GetRequiredService<ViewModelStore>(),
