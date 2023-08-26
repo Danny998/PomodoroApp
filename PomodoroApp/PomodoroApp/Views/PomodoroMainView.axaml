@@ -3,20 +3,81 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="650"
+			 xmlns:vm="using:PomodoroApp.ViewModels"
              x:Class="PomodoroApp.Views.PomodoroMainView"
-			 x:Name="Window">
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+			 xmlns:propertyType="using:PomodoroApp.StaticProperties"
+			 x:Name="Window"
+			 x:DataType="vm:PomodoroMainViewModel"
+			 x:CompileBindings="True">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:PomodoroMainViewModel />
+	</Design.DataContext>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition  />
-			<RowDefinition  Height="auto"/>
+			<RowDefinition  MinHeight="50" MaxHeight="50"/>
 		</Grid.RowDefinitions>
-		<Ellipse Height="300" Width="300"  Fill="Orange"></Ellipse>
-		<Button HorizontalAlignment="Center" Content="Start"></Button>
+		<DockPanel Height="280" Width="280">
 
-		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="100">
-			<Button Content="TEST"></Button>
-			<Button Content="TEST"></Button>
-			<Button Content="TEST"></Button>
-		</StackPanel>
+			<Button DockPanel.Dock="Left"
+					HorizontalAlignment="Center"
+					Command="{Binding ShowPropertyToSetCommand}"
+					CommandParameter="LongBreak">
+				<Button.Content>
+					<materialIcons:MaterialIcon Kind="Work" Height="32" Width="32" />
+				</Button.Content>
+			</Button>
+			<Button DockPanel.Dock="Right" 
+					HorizontalAlignment="Center"
+					Command="{Binding ShowPropertyToSetCommand}"
+					CommandParameter="CoffeeBreak">
+				<Button.Content>
+					<materialIcons:MaterialIcon Kind="Coffee" Height="32" Width="32" />
+				</Button.Content>
+			</Button>
+			<Button DockPanel.Dock="Bottom"
+					HorizontalAlignment="Center"
+					Command="{Binding ShowPropertyToSetCommand}"
+					CommandParameter="Timer">
+				<Button.Content>
+					<materialIcons:MaterialIcon Kind="Timer" Height="32" Width="32" />
+				</Button.Content>
+			</Button>
+			<Button DockPanel.Dock="Top" 
+					HorizontalAlignment="Center"
+					Command="{Binding ShowPropertyToSetCommand}"
+					CommandParameter="Cycles">
+				<Button.Content>
+					<materialIcons:MaterialIcon Kind="Hourglass" Height="32" Width="32" />
+				</Button.Content>
+			</Button>			
+			<Ellipse ZIndex="-1" Height="300" Width="300"  Fill="Orange"></Ellipse>
+		</DockPanel>
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition Width="1.5*" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="20" IsVisible="True">
+				<Slider Grid.Row="1"
+						Width="{Binding Path=$parent.Bounds.Width}"
+						Value="{Binding SliderValue}"
+						Minimum="{Binding SliderMinimum}"
+						Maximum="{Binding SliderMaximum}"
+						IsVisible="{Binding ShowPropertySlider}"
+						 
+				/>
+				<TextBlock HorizontalAlignment="Center" 
+						   VerticalAlignment="Center" 
+						   Text="{Binding SliderValue}" 
+						   Foreground="White"
+						   IsVisible="{Binding ShowPropertySlider}"
+			/>
+			</StackPanel>
+		</Grid>
 	</Grid>
 </UserControl>

@@ -1,19 +1,111 @@
-﻿using ReactiveUI;
+﻿using PomodoroApp.StaticProperties;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PomodoroApp.ViewModels
 {
     public class PomodoroMainViewModel : ViewModelBase
     {
-        public ReactiveCommand<Unit, Unit> StartPomodoroCommand { get; }
+        // public ReactiveCommand<Unit, Unit> StartPomodoroCommand { get; }
+        public ReactiveCommand<string, Unit> ShowPropertyToSetCommand { get; }
+        public ReactiveCommand<Unit, Unit> SetPropertyCommand { get; }
+        private string _currentPropertyToSet;
+        public string CurrentPropertyToSet
+        {
+            get
+            {
+                return _currentPropertyToSet;
+            }
+            set
+            {
+                _currentPropertyToSet = value;
+                this.RaisePropertyChanged(nameof(CurrentPropertyToSet));
+                this.RaisePropertyChanged(nameof(ShowPropertySlider));
+            }
+        }
+        public bool ShowPropertySlider => !string.IsNullOrEmpty(_currentPropertyToSet);
+        public int _sliderValue;
+        public int SliderValue { get
+            {
+                return _sliderValue;
+            }
+            set
+            {
+                _sliderValue = value;
+                this.RaisePropertyChanged(nameof(SliderValue));
+                SetProperty();
+            }
+        }
+        [Reactive]
+        public int SliderMaximum { get; set; }
+        [Reactive]
+        public int SliderMinimum { get; set; }
         public PomodoroMainViewModel()
         {
-            
+            ShowPropertyToSetCommand = ReactiveCommand.Create<string>(ShowPropertyToSet);
+            SetPropertyCommand = ReactiveCommand.Create(SetProperty);
+        }
+        public void ShowPropertyToSet(string type)
+        {
+            if(CurrentPropertyToSet == type)
+            {
+                CurrentPropertyToSet = string.Empty;
+                return;
+            }
+            switch (type)
+            {
+                case PropertyType.Cycles:
+                    SliderValue = Settings.Default.Cycles;
+                    SliderMinimum = 2;
+                    SliderMaximum = 8;
+                    break;
+                case PropertyType.CoffeeBreak:
+                    SliderValue = Settings.Default.CoffeeBreak;
+                    SliderMinimum = 5;
+                    SliderMaximum = 15;
+                    break;
+                case PropertyType.LongBreak:
+                    SliderValue = Settings.Default.LongBreak;
+                    SliderMinimum = 15;
+                    SliderMaximum = 30;
+                    break;
+                case PropertyType.Timer:
+                    SliderValue = Settings.Default.Timer;
+                    SliderMinimum = 5;
+                    SliderMaximum = 45;
+                    break;
+            }
+            CurrentPropertyToSet = type;
+        }
+        public void SetProperty()
+        {
+            switch (CurrentPropertyToSet)
+            {
+                case PropertyType.Cycles:
+                    Settings.Default.Cycles = SliderValue;
+                    break;
+                case PropertyType.CoffeeBreak:
+                    Settings.Default.CoffeeBreak = SliderValue;
+                    break;
+                case PropertyType.LongBreak:
+                    Settings.Default.LongBreak = SliderValue;
+                    break;
+                case PropertyType.Timer:
+                    Settings.Default.Timer = SliderValue;
+                    break;
+            }
+            Settings.Default.Save();
+        }
+        public async Task StartPomodoro()
+        {
+
         }
     }
 }
