@@ -4,18 +4,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:PomodoroApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              x:Class="PomodoroApp.Views.HandlingPomodoroView"
 			 x:DataType="vm:HandlingPomodoroViewModel"
-			 x:CompileBindings="True">
+			 x:CompileBindings="True"
+			 FontSize="20">
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:HandlingPomodoroViewModel />
 	</Design.DataContext>
 	<Grid>
-		<Ellipse HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Red" Height="50" Width="50">
-
-		</Ellipse>
-		<TextBlock Text="{Binding TimeSpan,StringFormat=\{0:mm\\:ss\}}"/>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition  Height="auto"/>
+		</Grid.RowDefinitions>
+		<Grid Grid.RowSpan="2">
+				<Ellipse x:Name="anEllipse" Width="{Binding $self.Bounds.Height}" Stretch="Uniform" Fill="Gray" />
+			<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TimeSpan,StringFormat=\{0:mm\\:ss\}}"/>
+		</Grid>
+		<Button Command="{Binding StopTimerCommand}"
+				IsVisible="{Binding TimerIsRunning}"
+				HorizontalAlignment="Center" 
+				VerticalAlignment="Bottom">
+			<Button.Content>
+				<materialIcons:MaterialIcon Kind="Stop" Height="32" Width="32" />
+			</Button.Content>
+		</Button>		
+		<Button Command="{Binding StartTimerCommand}"
+				IsVisible="{Binding !TimerIsRunning}"
+				HorizontalAlignment="Center" 
+				VerticalAlignment="Bottom">
+			<Button.Content>
+				<materialIcons:MaterialIcon Kind="PlayArrow" Height="32" Width="32" />
+			</Button.Content>
+		</Button>
+		<StackPanel Grid.Row="1"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Bottom"
+					Margin="50"
+					Orientation="Horizontal"
+					Spacing="10">
+		</StackPanel>
 	</Grid>
 </UserControl>

@@ -12,6 +12,7 @@ namespace PomodoroApp.DependencyInjection
         public static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
         {
             StoresBootstrapper.RegisterStores(services, resolver);
+            ServicesBootstrapper.RegisterServices(services, resolver);
             ViewModelsBootstrapper.RegisterServices(services, resolver);
         }
     }

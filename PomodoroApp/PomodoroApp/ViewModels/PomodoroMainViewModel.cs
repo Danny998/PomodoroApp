@@ -1,4 +1,6 @@
-﻿using PomodoroApp.StaticProperties;
+﻿using PomodoroApp.Interfaces;
+using PomodoroApp.StaticProperties;
+using PomodoroApp.Stores;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -13,7 +15,7 @@ namespace PomodoroApp.ViewModels
 {
     public class PomodoroMainViewModel : ViewModelBase
     {
-        // public ReactiveCommand<Unit, Unit> StartPomodoroCommand { get; }
+        public ReactiveCommand<Unit, Unit> StartPomodoroCommand { get; }
         public ReactiveCommand<string, Unit> ShowPropertyToSetCommand { get; }
         public ReactiveCommand<Unit, Unit> SetPropertyCommand { get; }
         private string _currentPropertyToSet;
@@ -47,10 +49,14 @@ namespace PomodoroApp.ViewModels
         public int SliderMaximum { get; set; }
         [Reactive]
         public int SliderMinimum { get; set; }
-        public PomodoroMainViewModel()
+        private readonly INavigationService _navigationService;
+        public PomodoroMainViewModel(INavigationService navigationService)
         {
+
+            _navigationService = navigationService;
             ShowPropertyToSetCommand = ReactiveCommand.Create<string>(ShowPropertyToSet);
             SetPropertyCommand = ReactiveCommand.Create(SetProperty);
+            StartPomodoroCommand = ReactiveCommand.Create(StartPomodoro);
         }
         public void ShowPropertyToSet(string type)
         {
@@ -103,9 +109,9 @@ namespace PomodoroApp.ViewModels
             }
             Settings.Default.Save();
         }
-        public async Task StartPomodoro()
+        public void StartPomodoro()
         {
-
+            _navigationService.Navigate(ViewModel.PomodoroHandling);
         }
     }
 }
