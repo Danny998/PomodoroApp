@@ -17,7 +17,7 @@ namespace PomodoroApp.ViewModels
     {
         public HandlingPomodoroViewModel()
         {
-                
+
         }
         [Reactive]
         public TimeSpan TimeSpan { get; set; } = TimeSpan.FromSeconds(Settings.Default.Timer);
@@ -48,12 +48,26 @@ namespace PomodoroApp.ViewModels
         private readonly INavigationService _navigationService;
         public ReactiveCommand<Unit, Unit> StopTimerCommand { get; }
         public ReactiveCommand<Unit, Unit> StartTimerCommand { get; }
+        public ReactiveCommand<Unit, Unit> TimerCommand { get; }
         public HandlingPomodoroViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             StopTimerCommand = ReactiveCommand.Create(StopTimer);
             StartTimerCommand = ReactiveCommand.CreateFromTask(async () => await StartTimer());
+            TimerCommand = ReactiveCommand.Create(TimerMethod);
             RxApp.MainThreadScheduler.ScheduleAsync(async (_, __) => await StartTimer());
+        }
+        public void TimerMethod()
+        {
+            if (timer != null)
+            {
+                timer?.Dispose();
+                timer = null;
+            }
+            else
+            {
+                StartTimer();
+            }
         }
         public void StopTimer()
         {

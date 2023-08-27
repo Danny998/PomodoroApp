@@ -3,48 +3,64 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="using:PomodoroApp.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1366" d:DesignHeight="768"
 			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              x:Class="PomodoroApp.Views.HandlingPomodoroView"
 			 x:DataType="vm:HandlingPomodoroViewModel"
 			 x:CompileBindings="True"
-			 FontSize="20">
+			 FontSize="50">
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:HandlingPomodoroViewModel />
 	</Design.DataContext>
 	<Grid>
+		<Grid.ColumnDefinitions >
+			<ColumnDefinition />
+			<ColumnDefinition MinWidth="250" />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition />
-			<RowDefinition  Height="auto"/>
+			<RowDefinition MinHeight="250" />
+			<RowDefinition  />
 		</Grid.RowDefinitions>
-		<Grid Grid.RowSpan="2">
-				<Ellipse x:Name="anEllipse" Width="{Binding $self.Bounds.Height}" Stretch="Uniform" Fill="Gray" />
+		<Grid Grid.Row="1" Grid.Column="1">
+			<Button HorizontalAlignment="Stretch"
+					Height="{Binding $self.Bounds.Width}"
+					VerticalAlignment="Stretch"
+					HorizontalContentAlignment="Stretch"
+					VerticalContentAlignment="Stretch"
+					Command="{Binding TimerCommand}">
+				<Button.Styles>
+					<Style Selector="Button">
+						<Setter Property="Background" Value="Transparent" />
+					</Style>
+					<Style Selector="Button:focus  /template/ ContentPresenter, 
+						   Button:focus-within /template/ ContentPresenter, 
+						   Button:pressed /template/ ContentPresenter,
+						   Button:pointerover /template/ ContentPresenter,
+						   Button:disabled /template/ ContentPresenter">
+						<Setter Property="TextBlock.Background" Value="Transparent" />
+					</Style>
+					<Style Selector="Button:pressed /template/ ContentPresenter">
+						<Setter Property="RenderTransform" Value="scale(0.9)" />
+					</Style>
+				</Button.Styles>
+				<Button.Content>
+					<Ellipse x:Name="anEllipse" Height="{Binding $self.Bounds.Width}" Stretch="Uniform" Fill="#BB4949" />
+				</Button.Content>
+			</Button>
 			<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TimeSpan,StringFormat=\{0:mm\\:ss\}}"/>
 		</Grid>
-		<Button Command="{Binding StopTimerCommand}"
-				IsVisible="{Binding TimerIsRunning}"
-				HorizontalAlignment="Center" 
-				VerticalAlignment="Bottom">
-			<Button.Content>
-				<materialIcons:MaterialIcon Kind="Stop" Height="32" Width="32" />
-			</Button.Content>
-		</Button>		
-		<Button Command="{Binding StartTimerCommand}"
-				IsVisible="{Binding !TimerIsRunning}"
-				HorizontalAlignment="Center" 
-				VerticalAlignment="Bottom">
-			<Button.Content>
-				<materialIcons:MaterialIcon Kind="PlayArrow" Height="32" Width="32" />
-			</Button.Content>
-		</Button>
-		<StackPanel Grid.Row="1"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Bottom"
-					Margin="50"
-					Orientation="Horizontal"
-					Spacing="10">
-		</StackPanel>
+		<Grid Grid.Row="2" Grid.ColumnSpan="3">
+			<StackPanel Grid.Row="1"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Bottom"
+						Margin="50"
+						Orientation="Horizontal"
+						Spacing="10">
+			</StackPanel>
+		</Grid>
 	</Grid>
 </UserControl>
