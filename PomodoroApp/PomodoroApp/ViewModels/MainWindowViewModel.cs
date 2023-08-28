@@ -18,6 +18,10 @@ namespace PomodoroApp.ViewModels
             _viewModelStore.CurrentViewModelChanged += _viewModelStore_CurrentViewModelChanged;
             _viewModelStore.CurrentViewModel = mainViewModel;
         }
+        public MainWindowViewModel()
+        {
+            
+        }
 
         private void _viewModelStore_CurrentViewModelChanged()
         {

@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PomodoroApp.Controls.CycleControl">
+	<UserControl.Styles>
+		<Style Selector="Ellipse.Animate">
+			<Style.Animations>
+				<Animation  Duration="00:00:01" IterationCount="INFINITE" PlaybackDirection="Alternate">
+					<KeyFrame Cue="0%">
+						<Setter Property="Opacity" Value="0.0"/>
+					</KeyFrame>
+					<KeyFrame Cue="100%">
+						<Setter Property="Opacity" Value="1.0"/>
+					</KeyFrame>
+				</Animation>
+			</Style.Animations>
+		</Style>
+	</UserControl.Styles>
+	<Grid Margin="10">
+		<Ellipse x:Name="Ellipse" Width="50" Height="50" Fill="Gray" />
+	</Grid>
+</UserControl>

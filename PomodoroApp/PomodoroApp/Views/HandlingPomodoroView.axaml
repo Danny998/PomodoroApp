@@ -7,6 +7,7 @@
 			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              x:Class="PomodoroApp.Views.HandlingPomodoroView"
 			 x:DataType="vm:HandlingPomodoroViewModel"
+			 xmlns:controls="using:Pomodoro.Controls"
 			 x:CompileBindings="True"
 			 FontSize="50">
 	<Design.DataContext>
@@ -21,12 +22,23 @@
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition />
-			<RowDefinition MinHeight="250" />
+			<RowDefinition  />
+			<RowDefinition MinHeight="250" Height="{Binding #Button.Bounds.Height}" />
 			<RowDefinition  />
 		</Grid.RowDefinitions>
+				<ItemsControl Grid.ColumnSpan="3" 
+							  Grid.Row="0"
+					  ItemsSource="{Binding CycleControl}" 
+			HorizontalAlignment="Center" 
+			VerticalAlignment="Center">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+		</ItemsControl>
 		<Grid Grid.Row="1" Grid.Column="1">
-			<Button HorizontalAlignment="Stretch"
+			<Button x:Name="Button" HorizontalAlignment="Stretch"
 					Height="{Binding $self.Bounds.Width}"
 					VerticalAlignment="Stretch"
 					HorizontalContentAlignment="Stretch"
@@ -52,15 +64,6 @@
 				</Button.Content>
 			</Button>
 			<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TimeSpan,StringFormat=\{0:mm\\:ss\}}"/>
-		</Grid>
-		<Grid Grid.Row="2" Grid.ColumnSpan="3">
-			<StackPanel Grid.Row="1"
-						HorizontalAlignment="Center"
-						VerticalAlignment="Bottom"
-						Margin="50"
-						Orientation="Horizontal"
-						Spacing="10">
-			</StackPanel>
 		</Grid>
 	</Grid>
 </UserControl>
