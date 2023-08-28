@@ -58,6 +58,10 @@ namespace PomodoroApp.ViewModels
             SetPropertyCommand = ReactiveCommand.Create(SetProperty);
             StartPomodoroCommand = ReactiveCommand.Create(StartPomodoro);
         }
+        public PomodoroMainViewModel()
+        {
+            
+        }
         public void ShowPropertyToSet(string type)
         {
             if(CurrentPropertyToSet == type)

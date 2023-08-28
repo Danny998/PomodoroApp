@@ -16,85 +16,81 @@
 		<vm:PomodoroMainViewModel />
 	</Design.DataContext>
 	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition  />
-			<RowDefinition  MinHeight="50" MaxHeight="50"/>
-		</Grid.RowDefinitions>
-		<Grid Height="300" Width="300">
-
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition MinWidth="250" />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Grid Grid.ColumnSpan="3">
 			<Grid>
 				<Grid.RowDefinitions>
 					<RowDefinition />
-					<RowDefinition Height="2*" />
+					<RowDefinition MinHeight="250" />
 					<RowDefinition />
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition />
-					<ColumnDefinition Width="2*" />
+					<ColumnDefinition MinWidth="250" />
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 
-				<Image Grid.RowSpan="3" Grid.ColumnSpan="3" Source="/Assets/tomato.png"  Stretch="Uniform">
+				<Ellipse Grid.Row="1" Grid.Column="1" Height="{Binding $self.Bounds.Width}" Stretch="Uniform" Fill="#BB4949" />
 
-				</Image>
-				
-				<Button Grid.Row="1"
-						Grid.Column="1"
-						HorizontalAlignment="Left"
-						Command="{Binding ShowPropertyToSetCommand}"
-						CommandParameter="LongBreak">
-					<Button.Content>
-						<materialIcons:MaterialIcon Kind="Work" Height="32" Width="32" />
-					</Button.Content>
-				</Button>
+				<Grid Grid.Column="1"
+					  Grid.Row="1"
+					  Margin="5">
 
-				<Button Grid.Row="1"
-						Grid.Column="1"
-						HorizontalAlignment="Right"
-						Command="{Binding ShowPropertyToSetCommand}"
-						CommandParameter="CoffeeBreak">
-					<Button.Content>
-						<materialIcons:MaterialIcon Kind="Coffee" Height="32" Width="32" />
-					</Button.Content>
-				</Button>
-				<Button Grid.Row="1"
-						Grid.Column="1"
-						HorizontalAlignment="Center"
-						VerticalAlignment="Bottom"
-						Command="{Binding ShowPropertyToSetCommand}"
-						CommandParameter="Timer">
-					<Button.Content>
-						<materialIcons:MaterialIcon Kind="Timer" Height="32" Width="32" />
-					</Button.Content>
-				</Button>
-				<Button Grid.Row="1"
-						Grid.Column="1"
-						HorizontalAlignment="Center"
-						VerticalAlignment="Top"
-						Command="{Binding ShowPropertyToSetCommand}"
-						CommandParameter="Cycles">
-					<Button.Content>
-						<materialIcons:MaterialIcon Kind="Hourglass" Height="32" Width="32" />
-					</Button.Content>
-				</Button>
-				<Button Grid.Row="1"
-						Grid.Column="1"
-						HorizontalAlignment="Center"
-						VerticalAlignment="Center"
-						Command="{Binding StartPomodoroCommand}">
-					<Button.Content>
-						<materialIcons:MaterialIcon Kind="PlayArrow" Height="32" Width="32" />
-					</Button.Content>
-				</Button>
+					<Button Grid.Row="1"
+							Grid.Column="1"
+							HorizontalAlignment="Left"
+							Command="{Binding ShowPropertyToSetCommand}"
+							CommandParameter="LongBreak">
+						<Button.Content>
+							<materialIcons:MaterialIcon Kind="Work" Height="32" Width="32" />
+						</Button.Content>
+					</Button>
+					<Button 
+							HorizontalAlignment="Right"
+							Command="{Binding ShowPropertyToSetCommand}"
+							CommandParameter="CoffeeBreak">
+						<Button.Content>
+							<materialIcons:MaterialIcon Kind="Coffee" Height="32" Width="32" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Row="1"
+							Grid.Column="1"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Bottom"
+							Command="{Binding ShowPropertyToSetCommand}"
+							CommandParameter="Timer">
+						<Button.Content>
+							<materialIcons:MaterialIcon Kind="Timer" Height="32" Width="32" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Row="1"
+							Grid.Column="1"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Top"
+							Command="{Binding ShowPropertyToSetCommand}"
+							CommandParameter="Cycles">
+						<Button.Content>
+							<materialIcons:MaterialIcon Kind="Hourglass" Height="32" Width="32" />
+						</Button.Content>
+					</Button>
+					<Button Grid.Row="1"
+							Grid.Column="1"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							Command="{Binding StartPomodoroCommand}">
+						<Button.Content>
+							<materialIcons:MaterialIcon Kind="PlayArrow" Height="32" Width="32" />
+						</Button.Content>
+					</Button>
+				</Grid>
 			</Grid>
 		</Grid>
-		<Grid Grid.Row="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition />
-				<ColumnDefinition Width="1.5*" />
-				<ColumnDefinition />
-			</Grid.ColumnDefinitions>
-			<StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Spacing="20" IsVisible="True">
+
+			<StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Spacing="20" IsVisible="True">
 				<Slider Grid.Row="1"
 						Width="{Binding Path=$parent.Bounds.Width}"
 						Value="{Binding SliderValue}"
@@ -110,6 +106,6 @@
 						   IsVisible="{Binding ShowPropertySlider}"
 			/>
 			</StackPanel>
-		</Grid>
+
 	</Grid>
 </UserControl>
