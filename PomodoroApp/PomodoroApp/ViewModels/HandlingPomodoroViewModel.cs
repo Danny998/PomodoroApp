@@ -38,6 +38,8 @@ namespace PomodoroApp.ViewModels
             }
         }
         [Reactive]
+        public double Progress { get; set; }
+        [Reactive]
         public TimeSpan TimeSpan { get; set; } = TimeSpan.FromSeconds(Settings.Default.Timer);
         public bool IsWorkTime = true;
         public bool IsCoffeeBreak;
@@ -63,6 +65,7 @@ namespace PomodoroApp.ViewModels
                 else TimerIsRunning = true;
             }
         }
+        private TimeSpan timerFullTime;
         private CancellationToken cancellationToken = new CancellationToken();
         private readonly INavigationService _navigationService;
         public ReactiveCommand<Unit, Unit> StopTimerCommand { get; }
@@ -83,7 +86,7 @@ namespace PomodoroApp.ViewModels
                 {
 
                     MakeCycleControlAnimate(c);
-                   
+
                 }
                 CycleControl.Add(c);
             }
@@ -108,6 +111,11 @@ namespace PomodoroApp.ViewModels
         async Task StartTimer()
         {
             timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+            if (timerFullTime == TimeSpan.Zero)
+            {
+                timerFullTime = TimeSpan;
+                Progress = TimeSpan / timerFullTime;
+            }
             while (await timer.WaitForNextTickAsync(cancellationToken))
             {
                 if (TimeSpan <= TimeSpan.Zero)
@@ -142,16 +150,20 @@ namespace PomodoroApp.ViewModels
                             IsCoffeeBreak = true;
                             Cycles--;
                             var control = CycleControl.Where(s => s.Number == CurrentCycle).FirstOrDefault();
-                            if(control != null)
+                            if (control != null)
                             {
                                 RemoveCycleControlAnimate(control);
                             }
                             CurrentCycle++;
                         }
                     }
+                    timerFullTime = TimeSpan;
                 }
                 else
+                {
                     TimeSpan = TimeSpan - TimeSpan.FromSeconds(1);
+                }
+                Progress = TimeSpan / timerFullTime;
             }
 
         }

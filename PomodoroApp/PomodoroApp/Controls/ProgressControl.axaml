@@ -1,0 +1,33 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:PomodoroApp.Controls"
+		xmlns:converters="clr-namespace:PomodoroApp.Converters;assembly=PomodoroApp"
+		x:DataType="controls:ProgressControl">
+	<Design.PreviewWith>
+		<controls:ProgressControl />
+	</Design.PreviewWith>
+	<Styles.Resources>
+		<converters:DiameterAndThicknessToStrokeDashArrayConverter x:Key="DiameterAndThicknessToStrokeDashArrayConverter" />
+	</Styles.Resources>
+	<Style Selector="controls|ProgressControl">
+		<!-- Set Defaults -->
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Ellipse Stroke="White"
+						 StrokeThickness="{TemplateBinding Thickness}"
+						 Height="{TemplateBinding Diameter}"
+						 Width="{TemplateBinding Diameter}"
+						 RenderTransform="Rotate(270deg)"
+						 >
+					<Ellipse.StrokeDashArray>
+						<MultiBinding Converter="{StaticResource DiameterAndThicknessToStrokeDashArrayConverter}">
+							<Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+							<Binding Path="Thickness" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+							<Binding Path="Progress" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+						</MultiBinding>
+					</Ellipse.StrokeDashArray>
+				</Ellipse>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+</Styles>

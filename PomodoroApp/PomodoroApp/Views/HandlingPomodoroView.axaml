@@ -6,8 +6,8 @@
              mc:Ignorable="d" d:DesignWidth="1366" d:DesignHeight="768"
 			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              x:Class="PomodoroApp.Views.HandlingPomodoroView"
+			 xmlns:controls="clr-namespace:PomodoroApp.Controls;assembly=PomodoroApp"
 			 x:DataType="vm:HandlingPomodoroViewModel"
-			 xmlns:controls="using:Pomodoro.Controls"
 			 x:CompileBindings="True"
 			 FontSize="50">
 	<Design.DataContext>
@@ -17,23 +17,23 @@
 	</Design.DataContext>
 	<Grid>
 		<Grid.ColumnDefinitions >
-			<ColumnDefinition />
-			<ColumnDefinition MinWidth="250" />
-			<ColumnDefinition />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition MinWidth="250" Width="2*" MaxWidth="450" />
+			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition  />
-			<RowDefinition MinHeight="250" Height="{Binding #Button.Bounds.Height}" />
+			<RowDefinition MinHeight="200" />
+			<RowDefinition MinHeight="250" />
 			<RowDefinition  />
 		</Grid.RowDefinitions>
-				<ItemsControl Grid.ColumnSpan="3" 
-							  Grid.Row="0"
-					  ItemsSource="{Binding CycleControl}" 
-			HorizontalAlignment="Center" 
-			VerticalAlignment="Center">
+		<ItemsControl Grid.ColumnSpan="3"
+					  Grid.Row="0"
+			  ItemsSource="{Binding CycleControl}"
+	HorizontalAlignment="Center"
+	VerticalAlignment="Center">
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-					<WrapPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					<WrapPanel Height="150" Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 				</ItemsPanelTemplate>
 			</ItemsControl.ItemsPanel>
 		</ItemsControl>
@@ -43,7 +43,8 @@
 					VerticalAlignment="Stretch"
 					HorizontalContentAlignment="Stretch"
 					VerticalContentAlignment="Stretch"
-					Command="{Binding TimerCommand}">
+					Command="{Binding TimerCommand}"
+					>
 				<Button.Styles>
 					<Style Selector="Button">
 						<Setter Property="Background" Value="Transparent" />
@@ -60,7 +61,12 @@
 					</Style>
 				</Button.Styles>
 				<Button.Content>
-					<Ellipse x:Name="anEllipse" Height="{Binding $self.Bounds.Width}" Stretch="Uniform" Fill="#BB4949" />
+					<Grid>
+
+
+						<Ellipse x:Name="anEllipse" Height="{Binding $self.Bounds.Width}" Stretch="Uniform" Fill="#BB4949" />
+						<controls:ProgressControl Diameter="{Binding $parent.Bounds.Width}" Thickness="5" Progress="{Binding Progress}" />
+					</Grid>
 				</Button.Content>
 			</Button>
 			<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TimeSpan,StringFormat=\{0:mm\\:ss\}}"/>
