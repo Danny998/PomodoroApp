@@ -13,20 +13,23 @@
 		<!-- Set Defaults -->
 		<Setter Property="Template">
 			<ControlTemplate>
-				<Ellipse Stroke="White"
-						 StrokeThickness="{TemplateBinding Thickness}"
-						 Height="{TemplateBinding Diameter}"
-						 Width="{TemplateBinding Diameter}"
-						 RenderTransform="Rotate(270deg)"
+				<Grid>
+					<Ellipse Stroke="#fffeff"
+							 StrokeThickness="{TemplateBinding Thickness}"
+							 Height="{TemplateBinding Diameter}"
+							 Width="{TemplateBinding Diameter}"
+							 RenderTransform="Rotate(270deg)"
+							 StrokeLineCap="Round"
 						 >
-					<Ellipse.StrokeDashArray>
-						<MultiBinding Converter="{StaticResource DiameterAndThicknessToStrokeDashArrayConverter}">
-							<Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
-							<Binding Path="Thickness" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
-							<Binding Path="Progress" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
-						</MultiBinding>
-					</Ellipse.StrokeDashArray>
-				</Ellipse>
+						<Ellipse.StrokeDashArray>
+							<MultiBinding Converter="{StaticResource DiameterAndThicknessToStrokeDashArrayConverter}">
+								<Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+								<Binding Path="Thickness" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+								<Binding Path="Progress" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+							</MultiBinding>
+						</Ellipse.StrokeDashArray>
+					</Ellipse>
+				</Grid>
 			</ControlTemplate>
 		</Setter>
 	</Style>

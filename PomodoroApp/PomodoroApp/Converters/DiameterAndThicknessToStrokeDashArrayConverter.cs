@@ -25,7 +25,7 @@ namespace PomodoroApp.Converters
             double circumference = Math.PI * (diameter - thickness);
             double lineLength = circumference * progress;
             double gapLength = circumference - lineLength;
-            return new AvaloniaList<double>(new[] { lineLength / thickness, gapLength / thickness });
+            return new AvaloniaList<double>(new[] { gapLength / thickness, lineLength / thickness });
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
