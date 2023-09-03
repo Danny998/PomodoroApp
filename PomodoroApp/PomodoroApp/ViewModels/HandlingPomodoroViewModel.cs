@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
 using Avalonia.Threading;
 using PomodoroApp.Controls;
 using PomodoroApp.Interfaces;
@@ -40,7 +41,11 @@ namespace PomodoroApp.ViewModels
         [Reactive]
         public double Progress { get; set; }
         [Reactive]
+        public double OldProgress { get; set; }
+        [Reactive]
         public TimeSpan TimeSpan { get; set; } = TimeSpan.FromSeconds(Settings.Default.Timer);
+        [Reactive]
+        public bool Animate { get; set; }
         public bool IsWorkTime = true;
         public bool IsCoffeeBreak;
         public bool IsLongBreak;
@@ -118,6 +123,7 @@ namespace PomodoroApp.ViewModels
             }
             while (await timer.WaitForNextTickAsync(cancellationToken))
             {
+                Animate = false;
                 if (TimeSpan <= TimeSpan.Zero)
                 {
                     if (IsLongBreak)
@@ -162,11 +168,24 @@ namespace PomodoroApp.ViewModels
                 else
                 {
                     TimeSpan = TimeSpan - TimeSpan.FromSeconds(1);
+                    OldProgress = Progress;
+                    Progress = TimeSpan / timerFullTime;
+                    Animate = true;
                 }
-                Progress = TimeSpan / timerFullTime;
             }
 
         }
+
+        //async Task Animate()
+        //{
+        //    for (int i = 0; i < 30; i++)
+        //    {
+        //        if (timer == null) break;
+        //        var t = TimeSpan.FromSeconds(i) / 30;
+        //        Progress = (TimeSpan - t) / timerFullTime;
+        //        await Task.Delay(TimeSpan.FromSeconds(1) / 30);
+        //    }
+        //}
         private ObservableCollection<CycleControl> _cycleControl = new ObservableCollection<CycleControl>();
         public ObservableCollection<CycleControl> CycleControl
         {

@@ -1,7 +1,11 @@
 using Avalonia;
+using Avalonia.Animation;
+using Avalonia.Collections;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controlz.Controls;
 using Avalonia.Markup.Xaml;
 using PomodoroApp.DependencyInjection;
+using PomodoroApp.Extensions;
 using PomodoroApp.ViewModels;
 using PomodoroApp.Views;
 using Splat;
@@ -14,6 +18,7 @@ namespace PomodoroApp
         {
             AvaloniaXamlLoader.Load(this);
             RegisterDependencies();
+            Animation.RegisterAnimator<StrokeDashArrayAnimator>(prop => typeof(AvaloniaList<double>).IsAssignableFrom(prop.PropertyType));
         }
 
         public override void OnFrameworkInitializationCompleted()

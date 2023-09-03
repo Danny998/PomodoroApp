@@ -2,7 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="using:PomodoroApp.Controls"
 		xmlns:converters="clr-namespace:PomodoroApp.Converters;assembly=PomodoroApp"
-		x:DataType="controls:ProgressControl">
+		x:DataType="controls:ProgressControl"
+		xmlns:extensions="using:PomodoroApp.Extensions">
 	<Design.PreviewWith>
 		<controls:ProgressControl />
 	</Design.PreviewWith>
@@ -14,20 +15,43 @@
 		<Setter Property="Template">
 			<ControlTemplate>
 				<Grid>
+					<Grid.Styles>
+						<Style Selector="Ellipse.Animation">
+							<Style.Animations>
+								<Animation Duration="00:00:01" FillMode="Forward">
+									<KeyFrame Cue="0%">
+										<Setter Property="StrokeDashArray" Animation.Animator="{x:Type extensions:StrokeDashArrayAnimator}">
+											<Setter.Value>
+												<MultiBinding Converter="{StaticResource DiameterAndThicknessToStrokeDashArrayConverter}">
+													<Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+													<Binding Path="Thickness" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+													<Binding Path="OldProgress" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+												</MultiBinding>
+											</Setter.Value>
+										</Setter>
+									</KeyFrame>
+									<KeyFrame Cue="100%">
+										<Setter Property="StrokeDashArray" Animation.Animator="{x:Type extensions:StrokeDashArrayAnimator}">
+											<Setter.Value>
+												<MultiBinding Converter="{StaticResource DiameterAndThicknessToStrokeDashArrayConverter}">
+													<Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+													<Binding Path="Thickness" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+													<Binding Path="Progress" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
+												</MultiBinding>
+											</Setter.Value>
+										</Setter>
+									</KeyFrame>
+								</Animation>
+							</Style.Animations>
+						</Style>
+					</Grid.Styles>
 					<Ellipse Stroke="#fffeff"
 							 StrokeThickness="{TemplateBinding Thickness}"
 							 Height="{TemplateBinding Diameter}"
 							 Width="{TemplateBinding Diameter}"
 							 RenderTransform="Rotate(270deg)"
 							 StrokeLineCap="Round"
-						 >
-						<Ellipse.StrokeDashArray>
-							<MultiBinding Converter="{StaticResource DiameterAndThicknessToStrokeDashArrayConverter}">
-								<Binding Path="Diameter" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
-								<Binding Path="Thickness" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
-								<Binding Path="Progress" RelativeSource="{RelativeSource TemplatedParent}" Mode="OneWay" />
-							</MultiBinding>
-						</Ellipse.StrokeDashArray>
+							 Classes.Animation="{TemplateBinding Animate}">
 					</Ellipse>
 				</Grid>
 			</ControlTemplate>

@@ -65,7 +65,7 @@
 
 
 						<Ellipse x:Name="anEllipse" Height="{Binding $self.Bounds.Width}" Stretch="Uniform" Fill="#BB4949" />
-						<controls:ProgressControl Diameter="{Binding $parent.Bounds.Width}" Thickness="5" Progress="{Binding Progress}" />
+						<controls:ProgressControl x:Name="Ellipse" Diameter="{Binding $parent.Bounds.Width}" Thickness="5" Progress="{Binding Progress}" OldProgress="{Binding OldProgress}" Animate="{Binding Animate}" />
 					</Grid>
 				</Button.Content>
 			</Button>
