@@ -21,7 +21,7 @@ namespace PomodoroApp.DependencyInjection
         private static void RegisterCommonServices(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
         {
             services.RegisterLazySingleton(() => new AboutViewModel());
-            services.Register(() => new HandlingPomodoroViewModel(resolver.GetRequiredService<INavigationService>()));
+            services.Register(() => new HandlingPomodoroViewModel(resolver.GetRequiredService<INavigationService>(),resolver.GetRequiredService<ISoundEffectService>()));
             services.Register(() => new PomodoroMainViewModel(resolver.GetRequiredService<INavigationService>()));
             services.RegisterLazySingleton(() => new MainViewModel(resolver.GetRequiredService<ViewModelStore>(),
                 resolver.GetRequiredService<PomodoroMainViewModel>()));

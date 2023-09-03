@@ -72,24 +72,24 @@ namespace PomodoroApp.ViewModels
             switch (type)
             {
                 case PropertyType.Cycles:
-                    SliderValue = Settings.Default.Cycles;
                     SliderMinimum = 2;
                     SliderMaximum = 8;
+                    SliderValue = Settings.Default.Cycles;
                     break;
                 case PropertyType.CoffeeBreak:
-                    SliderValue = Settings.Default.CoffeeBreak;
                     SliderMinimum = 5;
                     SliderMaximum = 15;
+                    SliderValue = Settings.Default.CoffeeBreak;
                     break;
                 case PropertyType.LongBreak:
-                    SliderValue = Settings.Default.LongBreak;
                     SliderMinimum = 15;
                     SliderMaximum = 30;
+                    SliderValue = Settings.Default.LongBreak;
                     break;
                 case PropertyType.Timer:
-                    SliderValue = Settings.Default.Timer;
                     SliderMinimum = 5;
                     SliderMaximum = 45;
+                    SliderValue = Settings.Default.Timer;
                     break;
             }
             CurrentPropertyToSet = type;

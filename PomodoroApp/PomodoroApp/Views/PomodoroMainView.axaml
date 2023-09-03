@@ -15,6 +15,21 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:PomodoroMainViewModel />
 	</Design.DataContext>
+	<UserControl.Styles>
+		<Style Selector="Button">
+			<Setter Property="Background" Value="Transparent" />
+		</Style>
+		<Style Selector="Button:focus  /template/ ContentPresenter, 
+						   Button:focus-within /template/ ContentPresenter, 
+						   Button:pressed /template/ ContentPresenter,
+						   Button:pointerover /template/ ContentPresenter,
+						   Button:disabled /template/ ContentPresenter">
+			<Setter Property="TextBlock.Background" Value="Transparent" />
+		</Style>
+		<Style Selector="Button:pressed /template/ ContentPresenter">
+			<Setter Property="RenderTransform" Value="scale(0.9)" />
+		</Style>
+	</UserControl.Styles>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
@@ -34,11 +49,12 @@
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 
-				<Ellipse Grid.Row="1" Grid.Column="1" Height="{Binding $self.Bounds.Width}" Stretch="Uniform" Fill="#BB4949" />
+				<Ellipse Name="Ellipse" Grid.Row="1" Grid.Column="1" Height="{Binding $self.Bounds.Width}" Stretch="Uniform" Fill="#BB4949" />
 
 				<Grid Grid.Column="1"
 					  Grid.Row="1"
-					  Margin="5">
+					  Margin="5"
+					  Height="{Binding #Ellipse.Height}">
 
 					<Button Grid.Row="1"
 							Grid.Column="1"
@@ -46,15 +62,15 @@
 							Command="{Binding ShowPropertyToSetCommand}"
 							CommandParameter="LongBreak">
 						<Button.Content>
-							<materialIcons:MaterialIcon Kind="Work" Height="32" Width="32" />
+							<materialIcons:MaterialIcon Kind="Work" Height="48" Width="48" />
 						</Button.Content>
 					</Button>
-					<Button 
+					<Button
 							HorizontalAlignment="Right"
 							Command="{Binding ShowPropertyToSetCommand}"
 							CommandParameter="CoffeeBreak">
 						<Button.Content>
-							<materialIcons:MaterialIcon Kind="Coffee" Height="32" Width="32" />
+							<materialIcons:MaterialIcon Kind="Coffee" Height="48" Width="48" />
 						</Button.Content>
 					</Button>
 					<Button Grid.Row="1"
@@ -64,7 +80,7 @@
 							Command="{Binding ShowPropertyToSetCommand}"
 							CommandParameter="Timer">
 						<Button.Content>
-							<materialIcons:MaterialIcon Kind="Timer" Height="32" Width="32" />
+							<materialIcons:MaterialIcon Kind="Timer" Height="48" Width="48" />
 						</Button.Content>
 					</Button>
 					<Button Grid.Row="1"
@@ -74,7 +90,7 @@
 							Command="{Binding ShowPropertyToSetCommand}"
 							CommandParameter="Cycles">
 						<Button.Content>
-							<materialIcons:MaterialIcon Kind="Hourglass" Height="32" Width="32" />
+							<materialIcons:MaterialIcon Kind="Hourglass" Height="48" Width="48" />
 						</Button.Content>
 					</Button>
 					<Button Grid.Row="1"
@@ -83,29 +99,29 @@
 							VerticalAlignment="Center"
 							Command="{Binding StartPomodoroCommand}">
 						<Button.Content>
-							<materialIcons:MaterialIcon Kind="PlayArrow" Height="32" Width="32" />
+							<materialIcons:MaterialIcon Kind="PlayArrow" Height="64" Width="64" />
 						</Button.Content>
 					</Button>
 				</Grid>
 			</Grid>
 		</Grid>
 
-			<StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Spacing="20" IsVisible="True">
-				<Slider Grid.Row="1"
-						Width="{Binding Path=$parent.Bounds.Width}"
-						Value="{Binding SliderValue}"
-						Minimum="{Binding SliderMinimum}"
-						Maximum="{Binding SliderMaximum}"
-						IsVisible="{Binding ShowPropertySlider}"
+		<StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Spacing="20" IsVisible="True">
+			<Slider Grid.Row="1"
+					Width="{Binding Path=$parent.Bounds.Width}"
+					Value="{Binding SliderValue}"
+					Minimum="{Binding SliderMinimum}"
+					Maximum="{Binding SliderMaximum}"
+					IsVisible="{Binding ShowPropertySlider}"
 						 
 				/>
-				<TextBlock HorizontalAlignment="Center"
-						   VerticalAlignment="Center"
-						   Text="{Binding SliderValue}"
-						   Foreground="White"
-						   IsVisible="{Binding ShowPropertySlider}"
+			<TextBlock HorizontalAlignment="Center"
+					   VerticalAlignment="Center"
+					   Text="{Binding SliderValue}"
+					   Foreground="White"
+					   IsVisible="{Binding ShowPropertySlider}"
 			/>
-			</StackPanel>
+		</StackPanel>
 
 	</Grid>
 </UserControl>

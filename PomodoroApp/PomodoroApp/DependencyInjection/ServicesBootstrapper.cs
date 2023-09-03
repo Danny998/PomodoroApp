@@ -19,8 +19,9 @@ namespace PomodoroApp.DependencyInjection
         }
         private static void RegisterCommonServices(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
         {
-            services.Register(() => new ViewModelFactory(resolver),typeof(IViewModelFactory));
-            services.RegisterConstant(new NavigationService(resolver.GetRequiredService<ViewModelStore>(), resolver.GetRequiredService<IViewModelFactory>()),typeof(INavigationService));
+            services.Register(() => new ViewModelFactory(resolver), typeof(IViewModelFactory));
+            services.RegisterConstant(new NavigationService(resolver.GetRequiredService<ViewModelStore>(), resolver.GetRequiredService<IViewModelFactory>()), typeof(INavigationService));
+            services.RegisterConstant(new SoundEffectService(), typeof(ISoundEffectService));
         }
     }
 }

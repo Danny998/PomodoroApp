@@ -73,10 +73,12 @@ namespace PomodoroApp.ViewModels
         private TimeSpan timerFullTime;
         private CancellationToken cancellationToken = new CancellationToken();
         private readonly INavigationService _navigationService;
+        private readonly ISoundEffectService _soundEffectService;
         public ReactiveCommand<Unit, Unit> StopTimerCommand { get; }
         public ReactiveCommand<Unit, Unit> StartTimerCommand { get; }
         public ReactiveCommand<Unit, Unit> TimerCommand { get; }
-        public HandlingPomodoroViewModel(INavigationService navigationService)
+        public HandlingPomodoroViewModel(INavigationService navigationService,
+            ISoundEffectService soundEffectService)
         {
             _navigationService = navigationService;
             StopTimerCommand = ReactiveCommand.Create(StopTimer);
@@ -95,6 +97,7 @@ namespace PomodoroApp.ViewModels
                 }
                 CycleControl.Add(c);
             }
+            _soundEffectService = soundEffectService;
         }
         public void TimerMethod()
         {
@@ -164,6 +167,7 @@ namespace PomodoroApp.ViewModels
                         }
                     }
                     timerFullTime = TimeSpan;
+                    _soundEffectService.SuccessEffect();
                 }
                 else
                 {
