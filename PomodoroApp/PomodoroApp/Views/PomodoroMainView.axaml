@@ -33,28 +33,27 @@
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
-			<ColumnDefinition MinWidth="250" />
+			<ColumnDefinition MinWidth="250" Width="2*" MaxWidth="450"  />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
-		<Grid Grid.ColumnSpan="3">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition MinHeight="250" />
-					<RowDefinition />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition />
-					<ColumnDefinition MinWidth="250" />
-					<ColumnDefinition />
-				</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition MinHeight="100" />
+			<RowDefinition MinHeight="250" Height="2*" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
 
-				<Ellipse Name="Ellipse" Grid.Row="1" Grid.Column="1" Height="{Binding $self.Bounds.Width}" Stretch="Uniform" Fill="#BB4949" />
+				<Ellipse Name="Ellipse" 
+						 Grid.Row="1" 
+						 Grid.Column="1" 
+						 Width="{Binding $self.Bounds.Height}" 
+						 Stretch="Uniform" 
+						 Fill="#BB4949"
+						 Margin="10"/>
 
 				<Grid Grid.Column="1"
 					  Grid.Row="1"
 					  Margin="5"
-					  Height="{Binding #Ellipse.Height}">
+					  Width="{Binding $self.Bounds.Height}">
 
 					<Button Grid.Row="1"
 							Grid.Column="1"
@@ -103,10 +102,9 @@
 						</Button.Content>
 					</Button>
 				</Grid>
-			</Grid>
-		</Grid>
 
-		<StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Spacing="20" IsVisible="True">
+
+		<StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Spacing="20" IsVisible="True">
 			<Slider Grid.Row="1"
 					Width="{Binding Path=$parent.Bounds.Width}"
 					Value="{Binding SliderValue}"

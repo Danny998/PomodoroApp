@@ -1,4 +1,5 @@
-﻿using LibVLCSharp.Shared;
+﻿using Avalonia.Threading;
+using LibVLCSharp.Shared;
 using PomodoroApp.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,13 @@ namespace PomodoroApp.Implementations
                 using var libvlc = new LibVLC(enableDebugLogs: true);
                 using var media = new Media(libvlc, new Uri(@"C:\Users\danny\source\repos\PomodoroApp\PomodoroApp\PomodoroApp\Assets\success-sound-effect.mp3"));
                 using var mediaplayer = new MediaPlayer(media);
-                media.Dispose();
-                mediaplayer.Play();
+                mediaplayer.SetRole(MediaPlayerRole.Music);
+                // media.Dispose();
+                Dispatcher.UIThread.Invoke(new Action(() =>
+                {
+
+                    mediaplayer.Play();
+                }));
             }
             catch (Exception ex)
             {

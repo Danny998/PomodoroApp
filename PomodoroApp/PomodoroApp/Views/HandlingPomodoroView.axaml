@@ -22,9 +22,9 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition MinHeight="200" />
-			<RowDefinition MinHeight="250" />
-			<RowDefinition  />
+			<RowDefinition MinHeight="100" />
+			<RowDefinition MinHeight="250" Height="2*" />
+			<RowDefinition />
 		</Grid.RowDefinitions>
 		<ItemsControl Grid.ColumnSpan="3"
 					  Grid.Row="0"
@@ -33,13 +33,16 @@
 	VerticalAlignment="Center">
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
-					<WrapPanel Height="150" Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+					<WrapPanel Height="150"
+							   Orientation="Horizontal"
+							   VerticalAlignment="Stretch"
+							   HorizontalAlignment="Stretch"/>
 				</ItemsPanelTemplate>
 			</ItemsControl.ItemsPanel>
 		</ItemsControl>
-		<Grid Grid.Row="1" Grid.Column="1">
+		<Grid Grid.Row="1" Grid.Column="1" Margin="5">
 			<Button x:Name="Button" HorizontalAlignment="Stretch"
-					Height="{Binding $self.Bounds.Width}"
+					Width="{Binding $self.Bounds.Height}"
 					VerticalAlignment="Stretch"
 					HorizontalContentAlignment="Stretch"
 					VerticalContentAlignment="Stretch"
@@ -62,14 +65,32 @@
 				</Button.Styles>
 				<Button.Content>
 					<Grid>
-
-
-						<Ellipse x:Name="anEllipse" Height="{Binding $self.Bounds.Width}" Stretch="Uniform" Fill="#BB4949" />
+						<Ellipse x:Name="anEllipse" Width="{Binding $self.Bounds.Height}" Stretch="Uniform" Fill="#BB4949" />
 						<controls:ProgressControl x:Name="Ellipse" Diameter="{Binding $parent.Bounds.Width}" Thickness="5" Progress="{Binding Progress}" OldProgress="{Binding OldProgress}" Animate="{Binding Animate}" />
 					</Grid>
 				</Button.Content>
 			</Button>
 			<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TimeSpan,StringFormat=\{0:mm\\:ss\}}"/>
 		</Grid>
+		<StackPanel Grid.Row="3"
+					Grid.ColumnSpan="3"
+					Orientation="Horizontal"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Spacing="50">
+			<Button Command="{Binding CoffeeBreakCommand}">
+				<Button.Content>
+					<materialIcons:MaterialIcon Height="48" Width="48" Kind="Coffee" />
+				</Button.Content>
+			</Button>
+			<Button Command="{Binding ExitCommand}">
+				<Button.Content>
+					<materialIcons:MaterialIcon
+						Height="48"
+						Width="48"
+						Kind="StopCircleOutline"/>
+				</Button.Content>
+			</Button>
+		</StackPanel>
 	</Grid>
 </UserControl>

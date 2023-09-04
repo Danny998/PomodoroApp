@@ -77,6 +77,8 @@ namespace PomodoroApp.ViewModels
         public ReactiveCommand<Unit, Unit> StopTimerCommand { get; }
         public ReactiveCommand<Unit, Unit> StartTimerCommand { get; }
         public ReactiveCommand<Unit, Unit> TimerCommand { get; }
+        public ReactiveCommand<Unit, Unit> ExitCommand { get; }
+        public ReactiveCommand<Unit, Unit> CoffeeBreakCommand { get; }
         public HandlingPomodoroViewModel(INavigationService navigationService,
             ISoundEffectService soundEffectService)
         {
@@ -84,6 +86,8 @@ namespace PomodoroApp.ViewModels
             StopTimerCommand = ReactiveCommand.Create(StopTimer);
             StartTimerCommand = ReactiveCommand.CreateFromTask(async () => await StartTimer());
             TimerCommand = ReactiveCommand.Create(TimerMethod);
+            ExitCommand = ReactiveCommand.Create(Exit);
+            CoffeeBreakCommand = ReactiveCommand.Create(MakeCoffeeBreak);
             RxApp.MainThreadScheduler.ScheduleAsync(async (_, __) => await StartTimer());
             for (int i = 1; i <= Cycles; i++)
             {
@@ -155,15 +159,7 @@ namespace PomodoroApp.ViewModels
                         }
                         else
                         {
-                            TimeSpan = TimeSpan.FromMinutes(CoffeeBreakTime);
-                            IsCoffeeBreak = true;
-                            Cycles--;
-                            var control = CycleControl.Where(s => s.Number == CurrentCycle).FirstOrDefault();
-                            if (control != null)
-                            {
-                                RemoveCycleControlAnimate(control);
-                            }
-                            CurrentCycle++;
+                            MakeCoffeeBreak();
                         }
                     }
                     timerFullTime = TimeSpan;
@@ -212,5 +208,32 @@ namespace PomodoroApp.ViewModels
             cycleControl.Ellipse.Fill = Avalonia.Media.Brushes.ForestGreen;
             cycleControl.Ellipse.Classes.Remove("Animate");
         }
+        void Exit()
+        {
+            _navigationService.Navigate(ViewModel.MainPomodoro);
+        }
+        void MakeCoffeeBreak()
+        {
+            UnSetEverythink();
+            if (Cycles <= 0) Exit();
+            TimeSpan = TimeSpan.FromMinutes(CoffeeBreakTime);
+            IsCoffeeBreak = true;
+            Cycles--;
+            var control = CycleControl.Where(s => s.Number == CurrentCycle).FirstOrDefault();
+            if (control != null)
+            {
+                RemoveCycleControlAnimate(control);
+            }
+            CurrentCycle++;
+            timerFullTime = TimeSpan;
+            _soundEffectService.SuccessEffect();
+        }
+        void UnSetEverythink()
+        {
+            IsCoffeeBreak = false;
+            IsWorkTime = false;
+            IsLongBreak = false;
+        }
+
     }
 }
