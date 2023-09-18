@@ -215,6 +215,8 @@ namespace PomodoroApp.ViewModels
         void MakeCoffeeBreak()
         {
             UnSetEverythink();
+            Progress = 100;
+            OldProgress = 100;
             if (Cycles <= 0) Exit();
             TimeSpan = TimeSpan.FromMinutes(CoffeeBreakTime);
             IsCoffeeBreak = true;

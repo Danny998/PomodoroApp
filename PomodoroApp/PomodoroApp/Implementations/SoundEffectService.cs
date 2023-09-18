@@ -1,5 +1,6 @@
 ﻿using Avalonia.Threading;
 using LibVLCSharp.Shared;
+using NLog;
 using PomodoroApp.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace PomodoroApp.Implementations
             try
             {
                 using var libvlc = new LibVLC(enableDebugLogs: true);
-                using var media = new Media(libvlc, new Uri(@"C:\Users\danny\source\repos\PomodoroApp\PomodoroApp\PomodoroApp\Assets\success-sound-effect.mp3"));
+                using var media = new Media(libvlc, new Uri(@"C:\Users\danny\Videos\2022-10-01 08-55-25.mkv"));
                 using var mediaplayer = new MediaPlayer(media);
                 mediaplayer.SetRole(MediaPlayerRole.Music);
                 // media.Dispose();
@@ -30,6 +31,8 @@ namespace PomodoroApp.Implementations
             }
             catch (Exception ex)
             {
+                var logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
             }
 
         }
